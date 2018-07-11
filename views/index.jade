@@ -2,4 +2,23 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Please input an array of packages (with up to one dependency each) comma separated. 
+  p It looks something like:
+  
+  div(class='code-sample')
+    p(class='code-sample-bookend') [
+      div(class='code-sample-middle')
+        p "KittenService: ", 
+        p "Leetmeme: Cyberportal", 
+        p "Cyberportal: Ice", 
+        p "CamelCaser: KittenService", 
+        p "Fraudstream: Leetmeme", 
+        p "Ice: " 
+    p(class='code-sample-bookend') ]
+  
+  div
+    textarea(name="", cols="50", rows="10")
+  
+  div
+    button(id="verify" type="button") Verify!
+  div(id="result")
