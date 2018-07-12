@@ -18,6 +18,8 @@ router.post('', function (req, res, next){
 
 function verifyData(req, res, next){
   let finalArray = [];
+  let packageArray = [];
+  let dependencyArray = [];
 
   let origContent = req.body.dependency_array.toString();
   if(origContent.slice(-1) === ']'){
@@ -40,15 +42,34 @@ function verifyData(req, res, next){
 
   console.log('array before verifying dependencies', array);
 
+  // first remove any without dependencies
   for(let x = 0; x < array.length; x++){
     console.log('current array item:', array[x]);
     let arrayItems = array[x].split(': ');
     console.log('arrayItems are:', arrayItems);
     if(arrayItems[1] === ''){
       finalArray.push(arrayItems[0]);
+    } else {
+      // Then separate those with dependencies by putting them in separate arrays
+      packageArray.push(arrayItems[0]);
+      dependencyArray.push(arrayItems[1]);
     }
   }
 
+  // now add any dependencies as long as they aren't already in finalArray
+  for(let x = 0; x < dependencyArray.length; x++){
+    if(!finalArray.includes(dependencyArray[x])){
+      finalArray.push(dependencyArray[x]);
+    }
+  }
+
+  // now add any packages as long as they aren't already in finalArray
+  for(let x = 0; x < packageArray.length; x++){
+    if(!finalArray.includes(packageArray[x])){
+      finalArray.push(packageArray[x]);
+    }
+  }
+  
   req.body.dependency_array = finalArray;
 
   next();
