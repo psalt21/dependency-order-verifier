@@ -10,9 +10,7 @@ router.get('/', function(req, res, next) {
 
 // POST for verifying dependency array
 router.post('', function (req, res, next){
-  console.log('before verifyData function', req.body.dependency_array);
   verifyData(req, res, next);
-  console.log('after verifyData function', req.body.dependency_array);
   res.render('verified', { title: 'Results:', dependency_array: req.body.dependency_array });
 });
 
@@ -40,13 +38,9 @@ function verifyData(req, res, next){
   origContent.trim();
   let array = origContent.split('", "');
 
-  console.log('array before verifying dependencies', array);
-
   // first remove any without dependencies
   for(let x = 0; x < array.length; x++){
-    console.log('current array item:', array[x]);
     let arrayItems = array[x].split(': ');
-    console.log('arrayItems are:', arrayItems);
     if(arrayItems[1] === ''){
       finalArray.push(arrayItems[0]);
     } else {
@@ -69,7 +63,7 @@ function verifyData(req, res, next){
       finalArray.push(packageArray[x]);
     }
   }
-  
+
   req.body.dependency_array = finalArray;
 
   next();
