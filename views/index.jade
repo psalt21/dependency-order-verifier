@@ -2,19 +2,11 @@ extends layout
 
 block content
   h1= title
-  p Please input an array of packages (with up to one dependency each) comma separated. 
-  p It looks something like:
+  p Input an array of packages (with up to one dependency each) comma separated. 
+  p(class='instructions') Please write it as a single line so it looks like this:
   
   div(class='code-sample')
-    p(class='code-sample-bookend') [
-      div(class='code-sample-middle')
-        p "KittenService: ", 
-        p "Leetmeme: Cyberportal", 
-        p "Cyberportal: Ice", 
-        p "CamelCaser: KittenService", 
-        p "Fraudstream: Leetmeme", 
-        p "Ice: " 
-    p(class='code-sample-bookend') ]
+    p ["KittenService: ", "Leetmeme: Cyberportal", "Cyberportal: Ice", "CamelCaser: KittenService", "Fraudstream: Leetmeme", "Ice: "]
   
   form(method="post" action="")
     div
