@@ -42,3 +42,8 @@ button {
 li {
   list-style-type: none;
 }
+
+#reset-link {
+  padding-right: 25px;
+  text-decoration: none;
+}
