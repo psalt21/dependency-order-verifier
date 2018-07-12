@@ -24,4 +24,21 @@ a {
 
 button {
   margin-top: 20px;
+  background-color: rgb(63, 182, 238); /* Green */
+  border: none;
+  color: white;
+  padding: 8px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.top-nav {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
 }

@@ -16,9 +16,9 @@ block content
         p "Ice: " 
     p(class='code-sample-bookend') ]
   
-  div
-    textarea(name="", cols="50", rows="10")
-  
-  div
-    button(id="verify" type="button") Verify!
+  form(method="post" action="")
+    div
+      textarea(type="text" placeholder="Place array here" name="dependency_array" required="true" cols="50" rows="10")
+    div
+      button(id="verify" type="submit") Verify
   div(id="result")
