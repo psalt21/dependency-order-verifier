@@ -10,16 +10,23 @@ router.get('/', function(req, res, next) {
 
 // POST for verifying dependency array
 router.post('', function (req, res, next){
-  verifyData(req, res, next);
+  router.processArrayFromRequest(req, res, next);
   res.render('verified', { title: 'Results:', dependency_array: req.body.dependency_array });
 });
 
-function verifyData(req, res, next){
+router.processArrayFromRequest = function (req, res, next){
+  let origArray = req.body.dependency_array.toString();
+  req.body.dependency_array = router.verifyData(origArray);
+
+  next();
+}
+
+router.verifyData = function (content){
   let finalArray = [];
   let packageArray = [];
   let dependencyArray = [];
 
-  let origContent = req.body.dependency_array.toString();
+  let origContent = content;
   if(origContent.slice(-1) === ']'){
     origContent = origContent.substring(0, origContent.length-1);
   }
@@ -64,9 +71,9 @@ function verifyData(req, res, next){
     }
   }
 
-  req.body.dependency_array = finalArray;
+  return finalArray;
 
-  next();
+  // next();
 };
 
 module.exports = router;
