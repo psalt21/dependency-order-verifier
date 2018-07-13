@@ -16,7 +16,7 @@ router.post('', function (req, res, next){
 
 router.processArrayFromRequest = function (req, res, next){
   // Extract "array" from request before sending to verifyData function
-  let origArray = req.body.dependency_array.toString();
+  let origArray = req.body.dependency_array;
   req.body.dependency_array = router.verifyData(origArray);
 
   next();
@@ -28,22 +28,10 @@ router.verifyData = function (content){
   let dependencyArray = [];
 
   let origContent = content;
-  if(origContent.slice(-1) === ']'){
-    origContent = origContent.substring(0, origContent.length-1);
-  }
-  if(origContent.slice(-1) === "\""){
-    origContent = origContent.substring(0, origContent.length-1);
-  }
-  if(origContent.charAt(0) === '['){
-    origContent = origContent.substring(1);
-  }
-  if(origContent.charAt(0) === '\"'){
-    origContent = origContent.substring(1);
-  }
-  if(origContent.charAt(0) === ' '){
-    origContent = origContent.substring(1);
-  }
-  origContent.trim();
+  // Remove brackets and quotation marks at both ends first
+    origContent = origContent.toString().substring(0, origContent.length-2);
+    origContent = origContent.toString().substring(2);
+  
   let array = origContent.split('", "');
 
   // first remove any without dependencies
