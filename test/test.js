@@ -11,6 +11,6 @@ let testArrayTwo = "[\"KittenService: \", \"Leetmeme: Cyberportal\", \"Cyberport
 
 describe('should test the verifyData function', () => {
     it('It should return order for valid packaged and dependencies to be installed', () => {
-        assert.equal(router.verifyData(testArrayOne).toString(), "KittenService,Ice,Cyberportal,Leetmeme,CamelCaser,Fraudstream");
+        assert.equal(router.verifyData(testArrayOne), "KittenService,Ice,Cyberportal,Leetmeme,CamelCaser,Fraudstream");
     });
 });
