@@ -15,6 +15,7 @@ router.post('', function (req, res, next){
 });
 
 router.processArrayFromRequest = function (req, res, next){
+  // Extract "array" from request before sending to verifyData function
   let origArray = req.body.dependency_array.toString();
   req.body.dependency_array = router.verifyData(origArray);
 
