@@ -1,25 +1,16 @@
 //Require the dependencies
 const chai = require('chai');
-const chaiHttp = require('chai-http');
-const server = require('../app');
+const expect = require('chai').expect;
 const should = chai.should();
 const assert = require('assert');
 
-let testArrayOne = ["KittenService: ","Leetmeme: Cyberportal","Cyberportal: Ice","CamelCaser: KittenService","Fraudstream: Leetmeme","Ice: "];
-let sameVerifierOutput = "KittenService, Ice, Cyberportal, Leetmeme, CamelCaser, Fraudstream";
-let verifierOutput = "KittenService, Ice, Cyberportal, Leetmeme, CamelCaser, Fraudstream";
+const router = require('../routes/index');
 
-chai.use(chaiHttp);
+let testArrayOne = "[\"KittenService: \", \"Leetmeme: Cyberportal\", \"Cyberportal: Ice\", \"CamelCaser: KittenService\", \"Fraudstream: Leetmeme\", \"Ice: \"]";
+let testArrayTwo = "[\"KittenService: \", \"Leetmeme: Cyberportal\", \"Cyberportal: Ice\", \"CamelCaser: KittenService\", \"Fraudstream: \", \"Ice: Leetmeme\" ]";
 
-describe('Verifier', () =>{
-    describe('/', function() {
-        it('it should verify array given in textarea', function(done){
-            chai.request(server)
-                .get('/')
-                .end((err, res) => {
-                    assert.equal(verifierOutput, sameVerifierOutput);
-                    done();
-                });
-        });
+describe('should test the verifyData function', () => {
+    it('It should return order for valid packaged and dependencies to be installed', () => {
+        assert.equal(router.verifyData(testArrayOne).toString(), "KittenService,Ice,Cyberportal,Leetmeme,CamelCaser,Fraudstream");
     });
 });
